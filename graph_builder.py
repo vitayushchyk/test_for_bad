@@ -11,7 +11,7 @@ class GraphBuilder:
 
     def build(self, fragments: Iterable[str]) -> nx.DiGraph:
         fragments_list = list(fragments)
-        self._log.info(
+        self._log.debug(
             "Building graph for %d fragments (overlap=%d)",
             len(fragments_list),
             self._overlap,
@@ -29,7 +29,7 @@ class GraphBuilder:
             for next_fragment in prefix_map.get(suffix, []):
                 if fragment != next_fragment:
                     graph.add_edge(fragment, next_fragment)
-        self._log.info(
+        self._log.debug(
             "Graph built: %d nodes, %d edges",
             graph.number_of_nodes(),
             graph.number_of_edges(),

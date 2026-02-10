@@ -19,12 +19,10 @@ class CpSatChainFinder:
     def __init__(
         self,
         logger: logging.Logger,
-        time_limit_sec: float = 30.0,
         workers: int = 8,
         overlap: int = 2,
     ) -> None:
         self._log = logger
-        self._time_limit_sec = time_limit_sec
         self._workers = workers
         self._overlap = overlap
 
@@ -77,19 +75,13 @@ class CpSatChainFinder:
         model.maximize(sum(used))
 
         solver = cp_model.CpSolver()
-        solver.parameters.max_time_in_seconds = self._time_limit_sec
         solver.parameters.num_search_workers = self._workers
 
-        self._log.info(
-            "CP-SAT solving (time_limit=%.1fs, workers=%d)...",
-            self._time_limit_sec,
-            self._workers,
-        )
         status = solver.solve(model)
         if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
             raise RuntimeError("CP-SAT failed to find a solution.")
 
-        self._log.info(
+        self._log.debug(
             "CP-SAT status: %s | objective=%s",
             solver.status_name(status),
             solver.objective_value,

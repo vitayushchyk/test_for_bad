@@ -35,10 +35,13 @@ class LoggerConfigurator:
         handlers = []
 
         if to_console:
-            log_format = "%(log_color)s[%(asctime)s] %(levelname)s in %(module)s:%(reset)s %(message_log_color)s%(message)s"
+            log_format = (
+                "%(log_color)s%(asctime)s | %(levelname)s | %(name)s%(reset)s "
+                "%(message_log_color)s%(message)s"
+            )
             formatter = ColoredFormatter(
                 log_format,
-                datefmt="%Y-%m-%d %H:%M:%S",
+                datefmt="%H:%M:%S",
                 log_colors={
                     "DEBUG": "cyan",
                     "INFO": "green",
