@@ -11,6 +11,17 @@ each fragment only once.
 ### Clone this repository using GitHub Desktop:
 
 ![Clone](docs/start.png)
+## Prerequisites:
+In this project used [UV](https://docs.astral.sh/uv/getting-started/installation/) environment
+
+## Installation:
+- UV sync:
+
+      uv sync 
+
+- Activate virtual environment:
+
+      source .venv/bin/activate
 
 ## Run app:
 
